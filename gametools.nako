@@ -1,0 +1,60 @@
+﻿決定は１３
+左は３７
+上は３８
+右は３９
+下は４０
+quitは８１
+
+choiceY=0
+
+●選択肢描画(質問名をchoiceから選択肢数で｛参照渡し｝choiceYとして)
+	塗り色＝$FFFFFF
+	線色＝$FFFFFF
+	文字サイズ＝10
+	
+	130,271から510,400へ四角。
+	
+    qx=140
+    cx=200
+    qy=280
+    precy=300
+    cinterval=20
+    
+    qx,qyへ質問名を文字表示。
+    cy=precy
+    xを0から(選択肢数-１)まで繰り返す
+		cx,cyへchoice[x]を文字表示。
+		cy=cy+cinterval
+		
+	もし、choiceY＜0ならば、choiceY＝選択肢数-1
+	もし、choiceY＞選択肢数-1ならば、choiceY＝0
+	
+	qx,precy+cinterval*(choiceY)へ「⇒」を文字表示。
+	
+●セリフ描画（セリフを）
+	塗り色＝$FFFFFF
+	線色＝$FFFFFF
+	文字サイズ＝10
+	
+	130,271から510,400へ四角。
+
+	140,320へセリフを文字表示。
+	
+●縦拡張選択肢描画（質問名をchoiceから選択肢数で表示数ほど｛参照渡し｝choiceYとして｛参照渡し｝arrowYへ）
+
+	もし、choiceY<0ならば、choiceY=0
+	もし、choiceY>選択肢数-1ならば、choiceY=選択肢数-1
+
+	iを0から表示数-1まで繰り返す
+		もし、arrowY<0ならば、
+				sent[i]=choice[choiceY+i]
+			違えば、
+				もし、arrowY>表示数-1ならば、
+					sent[i]=choice[choiceY-arrowY+1+i]
+				違えば、	
+					sent[i]=choice[choiceY-arrowY+i]
+	
+	もし、arrowY<0ならば、arrowY=0
+	もし、arrowY>表示数-1ならば、arrowY=表示数-1
+	
+	選択肢描画(質問名をsentから表示数でarrowYとして)
